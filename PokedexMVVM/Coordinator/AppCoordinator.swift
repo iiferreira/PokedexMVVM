@@ -25,9 +25,9 @@ class AppCoordinator : Coordinator {
         favoriteVC.coordinator = self
         favoriteVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(systemName: "star"), tag: 1)
         
-        let randomPokemonDetailView = PokemonDetailView()
         let randomPokemonViewModel = RandomPokemonDetailViewModel()
-        let randomPokemonDetailVC = PokemonDetailViewController(view: randomPokemonDetailView,viewModel: randomPokemonViewModel)
+        let randomPokemonDetailVC = RandomPokemonViewController(viewModel: randomPokemonViewModel)
+        randomPokemonDetailVC.coordinator = self
         randomPokemonDetailVC.tabBarItem = UITabBarItem(title: "Random", image: UIImage(systemName: "dice"), tag: 2)
         
         let tabBarController = UITabBarController()

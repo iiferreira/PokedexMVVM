@@ -18,7 +18,9 @@ class PokemonDetailView: UIView {
     lazy var name : UILabel = {
         let name = UILabel()
         name.translatesAutoresizingMaskIntoConstraints = false
+        name.adjustsFontSizeToFitWidth = true
         name.textColor = .white
+        name.textAlignment = .center
         name.font = UIFont.systemFont(ofSize: 38, weight: .bold)
         return name
     }()
@@ -30,6 +32,12 @@ class PokemonDetailView: UIView {
         return imageView
     }()
     
+    private lazy var activityIndicator : UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+    
     let containerView : UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,10 +47,9 @@ class PokemonDetailView: UIView {
     }()
     
     var segmentedControl : UISegmentedControl = {
-        let segmentedControl = UISegmentedControl(items: ["About", "Base Stats","Moves"])
+        let segmentedControl = UISegmentedControl(items: ["About", "Base Stats"])
         segmentedControl.setWidth(100, forSegmentAt: 0)
         segmentedControl.setWidth(100, forSegmentAt: 1)
-        segmentedControl.setWidth(100, forSegmentAt: 2)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
@@ -61,6 +68,7 @@ class PokemonDetailView: UIView {
         super.init(frame: .zero)
         setupView()
         setupSegmentedControlActions()
+        activityIndicator.startAnimating()
     }
     
     required init?(coder: NSCoder) {
@@ -74,6 +82,7 @@ class PokemonDetailView: UIView {
         
         self.addSubview(containerView)
         self.addSubview(name)
+        self.addSubview(activityIndicator)
         self.addSubview(imageView)
         containerView.addSubview(segmentedControl)
         
@@ -81,11 +90,16 @@ class PokemonDetailView: UIView {
             
             name.topAnchor.constraint(equalTo: self.topAnchor,constant: 50),
             name.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            name.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 25),
+            name.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25),
             
             imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor,constant: -70),
             imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             imageView.widthAnchor.constraint(equalToConstant: 220),
             imageView.heightAnchor.constraint(equalToConstant: 220),
+            
+            activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor,constant: -70),
+            activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             
             containerView.topAnchor.constraint(equalTo: self.centerYAnchor),
             containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -98,11 +112,16 @@ class PokemonDetailView: UIView {
         ])
     }
     
-    func configureWith(pokemon: Pokemon, color: UIColor) {
+    public func configureWith(pokemon: Pokemon, color: UIColor) {
         DispatchQueue.main.async { [weak self] in
             self?.backgroundColor = color
             self?.name.text = pokemon.name.capitalized
-            self?.imageView.kf.setImage(with: URL(string: pokemon.imageURL))
+            self?.imageView.kf.setImage(with: URL(string:pokemon.imageURL), completionHandler: { [weak self] result in
+                DispatchQueue.main.async {
+                    self?.activityIndicator.stopAnimating()
+                    self?.activityIndicator.isHidden = true
+                }
+            })
         }
     }
     

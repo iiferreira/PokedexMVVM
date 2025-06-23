@@ -47,6 +47,7 @@
 		A34DAC3F2E060E80000F07F0 /* PokemonDetailStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34DAC3E2E060E80000F07F0 /* PokemonDetailStatsView.swift */; };
 		A34DAC412E060E96000F07F0 /* PokemonDetailStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34DAC402E060E96000F07F0 /* PokemonDetailStatsViewController.swift */; };
 		A34DAC442E060F2E000F07F0 /* FavoriteDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A34DAC422E060F2D000F07F0 /* FavoriteDataModel.xcdatamodeld */; };
+		A3B792922E096D9F00A4DBC6 /* RandomPokemonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B792912E096D9F00A4DBC6 /* RandomPokemonViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		A34DAC3E2E060E80000F07F0 /* PokemonDetailStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailStatsView.swift; sourceTree = "<group>"; };
 		A34DAC402E060E96000F07F0 /* PokemonDetailStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailStatsViewController.swift; sourceTree = "<group>"; };
 		A34DAC432E060F2E000F07F0 /* FavoriteDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteDataModel.xcdatamodel; sourceTree = "<group>"; };
+		A3B792912E096D9F00A4DBC6 /* RandomPokemonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPokemonViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +262,7 @@
 		A34DAC262E060D08000F07F0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A3B792902E096D9000A4DBC6 /* RandomPokemonView */,
 				A34DAC342E060DE5000F07F0 /* PokemonDetailView */,
 				A34DAC312E060DC2000F07F0 /* PokemonFavoriteList */,
 				A34DAC2E2E060D83000F07F0 /* PokemonListTableViewCell */,
@@ -313,6 +316,14 @@
 				A34DAC402E060E96000F07F0 /* PokemonDetailStatsViewController.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		A3B792902E096D9000A4DBC6 /* RandomPokemonView */ = {
+			isa = PBXGroup;
+			children = (
+				A3B792912E096D9F00A4DBC6 /* RandomPokemonViewController.swift */,
+			);
+			path = RandomPokemonView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -461,6 +472,7 @@
 				A34DAC0E2E060A96000F07F0 /* StatsInfoRowView.swift in Sources */,
 				A34DAC3B2E060E41000F07F0 /* PokemonDetailInfoView.swift in Sources */,
 				A34DAC442E060F2E000F07F0 /* FavoriteDataModel.xcdatamodeld in Sources */,
+				A3B792922E096D9F00A4DBC6 /* RandomPokemonViewController.swift in Sources */,
 				A34DAC2B2E060D47000F07F0 /* PokemonListViewController.swift in Sources */,
 				A34DAC182E060B52000F07F0 /* CoreDataManager.swift in Sources */,
 				A34DAC362E060E07000F07F0 /* PokemonDetailViewController.swift in Sources */,

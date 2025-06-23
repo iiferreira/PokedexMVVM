@@ -1,7 +1,7 @@
 import UIKit
 import Kingfisher
 
-class PokemonTableViewCell : UITableViewCell {
+final class PokemonTableViewCell : UITableViewCell {
     
     static let cellIdentifier = "pokemonCellIdentifier"
     
@@ -26,6 +26,7 @@ class PokemonTableViewCell : UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 26, weight: .bold)
+        label.adjustsFontSizeToFitWidth = true
         //MARK: - Mudar aqui
         label.textColor = .white
         return label
@@ -38,7 +39,7 @@ class PokemonTableViewCell : UITableViewCell {
         return imageView
     }()
     
-    lazy var pokemonBackground : UIView = {
+    private lazy var pokemonBackground : UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemFill
@@ -95,6 +96,8 @@ class PokemonTableViewCell : UITableViewCell {
             
             name.topAnchor.constraint(equalTo: number.bottomAnchor),
             name.leadingAnchor.constraint(equalTo: number.leadingAnchor),
+            name.trailingAnchor.constraint(equalTo: pokemonBackground.leadingAnchor),
+            
             
             pokemonBackground.leadingAnchor.constraint(equalTo: containerView.centerXAnchor,constant: 30),
             pokemonBackground.topAnchor.constraint(equalTo: containerView.topAnchor),
@@ -115,7 +118,6 @@ class PokemonTableViewCell : UITableViewCell {
             let imageURL = URL(string: pokemon.imageURL)
             
             guard let boundsSize = self?.pokemonImageView.bounds.size else { return }
-            
             
             let processor = DownsamplingImageProcessor(size: boundsSize)
             

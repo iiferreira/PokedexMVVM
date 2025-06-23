@@ -7,7 +7,15 @@
 
 import UIKit
 
-class NetworkManager {
+enum NetworkError: Error {
+    case invalidURL
+    case invalidResponse
+    case httpError(statusCode: Int)
+    case decodingError
+    case unknown
+}
+
+final class NetworkManager {
     
     static let shared = NetworkManager()
     
@@ -15,14 +23,24 @@ class NetworkManager {
     
     func fetchData<T: Decodable>(from urlString: String) async throws -> T {
         guard let url = URL(string: urlString) else {
-            throw URLError(.badURL)
+            throw NetworkError.invalidURL
         }
-        
-        let (data, _) = try await URLSession.shared.data(from: url)
-        let decoder = JSONDecoder()
-        let decoded = try decoder.decode(T.self, from: data)
-        
-        return decoded
-    }
 
+        let (data, response) = try await URLSession.shared.data(from: url)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw NetworkError.invalidResponse
+        }
+
+        guard (200...299).contains(httpResponse.statusCode) else {
+            throw NetworkError.httpError(statusCode: httpResponse.statusCode)
+        }
+
+        do {
+            let decoder = JSONDecoder()
+            return try decoder.decode(T.self, from: data)
+        } catch {
+            throw NetworkError.decodingError
+        }
+    }
 }

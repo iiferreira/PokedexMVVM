@@ -13,12 +13,12 @@ class PokemonDetailViewController : UIViewController {
     var currentChildVC: UIViewController?
     
     let pokemonView : PokemonDetailView
-    var viewModel: PokemonDetail_Protocol
+    var viewModel: PokemonDetailViewModel
     
     var detailVC: PokemonDetailInfoViewController?
     var statsVC : PokemonDetailStatsViewController?
 
-    init(view:PokemonDetailView ,viewModel: PokemonDetail_Protocol) {
+    init(view:PokemonDetailView ,viewModel:PokemonDetailViewModel) {
         self.viewModel = viewModel
         self.pokemonView = view
         super.init(nibName: nil, bundle: nil)
@@ -39,13 +39,13 @@ class PokemonDetailViewController : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Task { try await viewModel.fetchPokemonDetail() }
+        Task { await viewModel.fetchPokemonDetail() }
         viewModel.checkFavoriteStatus()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: viewModel.isFavorite ? "heart.fill" : "heart"), style: .plain, target: self, action: #selector(didTapFavoriteButton))
     }
     
     func bindViewModel() {
-        viewModel.displayPokemonDetail = { [weak self] pokemon,pokemonColor in
+        viewModel.onPokemonDetailFetched = { [weak self] pokemon,pokemonColor in
             guard let color = self?.convertReturnedColorToBackGroundColor(color: pokemonColor.color.name) else { return }
             
             DispatchQueue.main.async {
@@ -61,7 +61,7 @@ class PokemonDetailViewController : UIViewController {
     }
     
     @objc func didTapFavoriteButton() {
-        viewModel.favoritePokemon()
+        viewModel.toggleFavoriteStatus()
         navigationItem.rightBarButtonItem?.image = UIImage(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
     }
 }
@@ -77,8 +77,6 @@ extension PokemonDetailViewController : PokemonDetailViewDelegate {
             if let statsVC {
                 switchToChild(statsVC)
             }
-        case 2:
-            print("None")
         default:
             break
         }
