@@ -10,10 +10,10 @@ import UIKit
 
 class PokemonFavoriteViewController : UIViewController {
     
-    var viewModel : PokemonFavoriteListViewModel
+    private var viewModel : PokemonFavoriteListViewModel
     weak var coordinator : AppCoordinator?
     
-    var tableView : UITableView = {
+    private lazy var tableView : UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(PokemonTableViewCell.self, forCellReuseIdentifier: PokemonTableViewCell.cellIdentifier)
@@ -28,7 +28,6 @@ class PokemonFavoriteViewController : UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -61,8 +60,6 @@ class PokemonFavoriteViewController : UIViewController {
         }
     }
 }
-
-
 
 extension PokemonFavoriteViewController : UITableViewDataSource , UITableViewDelegate {
     

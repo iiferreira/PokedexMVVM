@@ -7,11 +7,12 @@
 
 final class PokemonDetailViewModel {
     
-    private let pokemon: PokemonListResult
+    private(set) var pokemon: PokemonListResult
     private(set) var isFavorite: Bool = false
 
     typealias PokemonDetailHandler = (Pokemon, PokemonColor) -> Void
     var onPokemonDetailFetched: PokemonDetailHandler?
+    var displayError : (()->Void)?
     
     init(pokemon: PokemonListResult) {
         self.pokemon = pokemon
@@ -31,7 +32,7 @@ final class PokemonDetailViewModel {
                 return
             }
         }
-
+        
         do {
             let detail: Pokemon = try await NetworkManager.shared.fetchData(from: pokemon.url)
             let color = try await fetchPokemonColor()
@@ -42,7 +43,7 @@ final class PokemonDetailViewModel {
             onPokemonDetailFetched?(detail, color)
         } catch {
             print("Failed to fetch Pokémon detail: \(error)")
-            // Optional: Retry logic or error callback here
+            displayError?()
         }
     }
     

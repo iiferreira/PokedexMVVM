@@ -10,8 +10,8 @@ import UIKit
 
 class PokemonDetailInfoViewController : UIViewController {
     
-    var pokemon: Pokemon
-    var infoView: PokemonDetailInfoView = PokemonDetailInfoView()
+    private var pokemon: Pokemon
+    private lazy var infoView: PokemonDetailInfoView = PokemonDetailInfoView()
     
     init(pokemon: Pokemon) {
         self.pokemon = pokemon
@@ -28,6 +28,6 @@ class PokemonDetailInfoViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        infoView.configureWith(pokemon)
+        infoView.configure(with: pokemon)
     }
 }

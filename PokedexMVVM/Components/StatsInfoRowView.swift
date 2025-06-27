@@ -47,8 +47,7 @@ class StatsInfoRowView: UIStackView {
         barView.setProgress(to: progress)
         barView.heightAnchor.constraint(equalToConstant: 10).isActive = true
         barView.barColor = UIColor.blue
-
-        // Add to stack
+        
         self.addArrangedSubview(titleLabel)
         self.addArrangedSubview(valueLabel)
         self.addArrangedSubview(barView)

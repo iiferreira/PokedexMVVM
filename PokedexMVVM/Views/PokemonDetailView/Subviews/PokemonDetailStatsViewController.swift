@@ -7,11 +7,11 @@
 
 import UIKit
 
-class PokemonDetailStatsViewController : UIViewController {
+final class PokemonDetailStatsViewController : UIViewController {
     
-    var pokemon : Pokemon
-    var color : UIColor
-    var statsView : PokemonDetailStatsView = PokemonDetailStatsView()
+    private var pokemon : Pokemon
+    private var color : UIColor
+    private lazy var statsView : PokemonDetailStatsView = PokemonDetailStatsView()
     
     init(pokemon: Pokemon, color : UIColor) {
         self.pokemon = pokemon

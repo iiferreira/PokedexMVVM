@@ -22,7 +22,7 @@ class PokemonListView : UIView {
         return activityView
     }()
     
-    var tableView : UITableView = {
+    private(set) lazy var tableView : UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .systemBackground
@@ -49,7 +49,7 @@ class PokemonListView : UIView {
             activityView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             activityView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             
-            tableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: self.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),

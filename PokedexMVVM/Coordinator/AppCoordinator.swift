@@ -15,8 +15,9 @@ class AppCoordinator : Coordinator {
     }
     
     func start() {
-        let pokemonListViewViewModel = PokemonListViewViewModel_Impl()
+        let pokemonListViewViewModel = PokemonListViewViewModelImpl()
         let pokemonListVC = PokemonListViewController(pokemonListViewViewModel: pokemonListViewViewModel)
+        pokemonListVC.title = "Pokemon"
         pokemonListVC.coordinator = self
         pokemonListVC.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         

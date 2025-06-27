@@ -27,7 +27,7 @@ final class PokemonTableViewCell : UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 26, weight: .bold)
         label.adjustsFontSizeToFitWidth = true
-        //MARK: - Mudar aqui
+        //TODO: - Fix Mudar aqui
         label.textColor = .white
         return label
     }()
@@ -65,7 +65,6 @@ final class PokemonTableViewCell : UITableViewCell {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(false, animated: false)
     }
-    
     
     override func prepareForReuse() {
         self.backgroundColor = .systemBackground

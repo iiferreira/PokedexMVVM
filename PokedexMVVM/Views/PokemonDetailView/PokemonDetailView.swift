@@ -11,7 +11,7 @@ protocol PokemonDetailViewDelegate : AnyObject {
     func didTapSegmentedControl(_ sender: UISegmentedControl)
 }
 
-class PokemonDetailView: UIView {
+final class PokemonDetailView: UIView {
     
     weak var delegate : PokemonDetailViewDelegate?
     
@@ -38,7 +38,7 @@ class PokemonDetailView: UIView {
         return activityIndicator
     }()
     
-    let containerView : UIView = {
+    private(set) lazy var containerView : UIView = {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.backgroundColor = .white
@@ -46,7 +46,7 @@ class PokemonDetailView: UIView {
         return containerView
     }()
     
-    var segmentedControl : UISegmentedControl = {
+    private(set) lazy var segmentedControl : UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["About", "Base Stats"])
         segmentedControl.setWidth(100, forSegmentAt: 0)
         segmentedControl.setWidth(100, forSegmentAt: 1)
@@ -55,7 +55,7 @@ class PokemonDetailView: UIView {
         return segmentedControl
     }()
     
-    let stackView : UIStackView = {
+    private lazy var stackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 10
@@ -129,7 +129,7 @@ class PokemonDetailView: UIView {
         self.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
     }
     
-    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+    @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         delegate?.didTapSegmentedControl(sender)
     }
     

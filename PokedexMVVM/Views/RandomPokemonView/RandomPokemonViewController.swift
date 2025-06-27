@@ -35,6 +35,16 @@ class RandomPokemonViewController : UIViewController {
         bindViewModel()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(fetchRandomPokemonButton)
@@ -48,7 +58,7 @@ class RandomPokemonViewController : UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel.displayRandomPokemon = { pokemon in
+        viewModel.onDisplayRandomPokemon = { pokemon in
             DispatchQueue.main.async { [weak self] in
                 self?.coordinator?.navigateToDetail(pokemon: pokemon)
             }
@@ -56,6 +66,6 @@ class RandomPokemonViewController : UIViewController {
     }
     
     @objc func didTapFetchRandomPokemonButton(_ sender:UIButton) {
-        Task { await viewModel.fetchRandomPokemon() }
+        Task { try await viewModel.fetchRandomPokemon() }
     }
 }

@@ -11,11 +11,13 @@ protocol PokemonListViewViewModel {
     var pokemonList: [PokemonListResult] { get }
     var displayData: (() -> Void)? { get set }
     var isLoading: Bool { get }
+
     func fetchPokemons() async throws
     func loadMorePokemons() async
 }
 
-class PokemonListViewViewModel_Impl: PokemonListViewViewModel {
+
+final class PokemonListViewViewModelImpl: PokemonListViewViewModel {
 
     private(set) var pokemonList: [PokemonListResult] = []
     var displayData: (() -> Void)?
@@ -23,38 +25,43 @@ class PokemonListViewViewModel_Impl: PokemonListViewViewModel {
     private var nextURL: String?
 
     func fetchPokemons() async throws {
-        guard !isLoading else { return }
+        guard canStartLoading else { return }
+
         isLoading = true
         defer { isLoading = false }
 
         do {
             let response = try await fetchInitialPokemonData()
-            self.pokemonList = response.results
-            self.nextURL = response.next
+            pokemonList = response.results
+            nextURL = response.next
             displayData?()
         } catch {
-            print("Fetch error: \(error)")
+            print("Failed to fetch Pokémons: \(error)")
             throw error
         }
     }
 
     func loadMorePokemons() async {
-        guard !isLoading, let nextURL = nextURL else { return }
+        guard canStartLoading, let url = nextURL else { return }
+
         isLoading = true
         defer { isLoading = false }
 
         do {
-            let response: APIResponse = try await NetworkManager.shared.fetchData(from: nextURL)
-            self.nextURL = response.next
-            self.pokemonList.append(contentsOf: response.results)
+            let response: APIResponse = try await NetworkManager.shared.fetchData(from: url)
+            nextURL = response.next
+            pokemonList.append(contentsOf: response.results)
             displayData?()
         } catch {
-            print("Load more error: \(error)")
+            print("Failed to load more Pokémons: \(error)")
         }
+    }
+
+    private var canStartLoading: Bool {
+        !isLoading
     }
 
     private func fetchInitialPokemonData() async throws -> APIResponse {
         try await NetworkManager.shared.fetchData(from: Endpoint.short.url)
     }
 }
-

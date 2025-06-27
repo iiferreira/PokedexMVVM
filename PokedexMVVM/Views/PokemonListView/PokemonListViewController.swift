@@ -31,6 +31,9 @@ final class PokemonListViewController : UIViewController {
         fetchPokemons()
         setupTableView()
         bindViewModel()
+        self.title = "Pokemon"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
     }
     
     private func bindViewModel() {
@@ -47,8 +50,7 @@ final class PokemonListViewController : UIViewController {
     }
     
     private func fetchPokemons() {
-        Task { try await viewModel.fetchPokemons() }
+        Task(priority: .userInitiated) { try await viewModel.fetchPokemons() }
     }
-
 }
 
