@@ -1,0 +1,66 @@
+# === Xcode ===
+build/
+DerivedData/
+*.xcworkspace
+*.xcuserstate
+*.xccheckout
+xcuserdata/
+*.moved-aside
+
+# === Swift Package Manager ===
+.build/
+.swiftpm/
+Packages/
+Package.resolved
+
+# === CocoaPods ===
+Pods/
+Podfile.lock
+
+# === Carthage ===
+Carthage/
+Carthage/Build/
+
+# === Core Data (exclude runtime DB, but include schema) ===
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Keep this! Include all .xcdatamodeld files (Core Data schema)
+!*.xcdatamodeld/
+!*.xcdatamodeld/**
+
+# === Fastlane ===
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+
+# === User/IDE Specific ===
+*.orig
+*.swp
+.DS_Store
+.idea/
+*.iml
+*.hmap
+
+# === Archives & Symbols ===
+*.ipa
+*.xcarchive
+*.dSYM
+*.dSYM.zip
+
+# === Playgrounds ===
+timeline.xctimeline
+playground.xcworkspace
+
+# === SwiftLint / Tools ===
+.swiftlint.yml
+.swiftformat
+
+# === Secrets / Configs ===
+*.env
+*.key
+*.crt
+*.pem
+
