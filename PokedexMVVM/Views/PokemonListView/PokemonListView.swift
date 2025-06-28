@@ -1,6 +1,6 @@
 //
-//  PokemonView.swift
-//  PokedexCleanSwift
+//  PokemonListView.swift
+//  PokedexMVVM
 //
 //  Created by Iuri Ferreira on 5/26/25.
 //

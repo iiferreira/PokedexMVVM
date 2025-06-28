@@ -1,6 +1,6 @@
 //
 //  StatBarView.swift
-//  PokedexCleanSwift
+//  PokedexMVVM
 //
 //  Created by Iuri Ferreira on 5/29/25.
 //

@@ -1,3 +1,10 @@
+//
+//  RandomPokemonDetailViewModel.swift
+//  PokedexMVVM
+//
+//  Created by Iuri Ferreira on 6/10/25.
+//
+
 import Foundation
 
 final class RandomPokemonDetailViewModel {

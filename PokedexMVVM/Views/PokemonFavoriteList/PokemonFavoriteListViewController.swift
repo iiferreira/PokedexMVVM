@@ -1,6 +1,6 @@
 //
 //  PokemonFavoriteViewController.swift
-//  PokedexCleanSwift
+//  PokedexMVVM
 //
 //  Created by Iuri Ferreira on 03/06/25.
 //

@@ -1,3 +1,10 @@
+//
+//  PokemonDetailInfoView.swift
+//  PokedexMVVM
+//
+//  Created by Iuri Ferreira on 5/28/25.
+//
+
 
 import UIKit
 

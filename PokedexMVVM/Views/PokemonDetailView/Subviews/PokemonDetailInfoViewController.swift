@@ -1,6 +1,6 @@
 //
-//  PokemonDetailViewController.swift
-//  PokedexCleanSwift
+//  PokemonDetailInfoViewController.swift
+//  PokedexMVVM
 //
 //  Created by Iuri Ferreira on 5/28/25.
 //
