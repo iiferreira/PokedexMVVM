@@ -58,9 +58,9 @@ class RandomPokemonViewController : UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel.onDisplayRandomPokemon = { pokemon in
-            DispatchQueue.main.async { [weak self] in
-                self?.coordinator?.navigateToDetail(pokemon: pokemon)
+        viewModel.onDisplayRandomPokemon = { [unowned self] pokemon in
+            DispatchQueue.main.async {
+                self.coordinator?.navigateToDetail(pokemon: pokemon)
             }
         }
     }

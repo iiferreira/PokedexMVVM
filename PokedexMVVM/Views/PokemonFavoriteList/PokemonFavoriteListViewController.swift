@@ -8,10 +8,12 @@
 import Foundation
 import UIKit
 
-class PokemonFavoriteViewController : UIViewController {
+final class PokemonFavoriteViewController : UIViewController {
     
     private var viewModel : PokemonFavoriteListViewModel
     weak var coordinator : AppCoordinator?
+    
+    private lazy var emptyView = EmptyPokemonView()
     
     private lazy var tableView : UITableView = {
         let tableView = UITableView()
@@ -45,8 +47,15 @@ class PokemonFavoriteViewController : UIViewController {
     
     private func setupUI() {
         view.addSubview(tableView)
+        view.addSubview(emptyView)
         
         NSLayoutConstraint.activate([
+            
+            emptyView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            emptyView.widthAnchor.constraint(equalToConstant: 300),
+            emptyView.heightAnchor.constraint(equalToConstant: 300),
+            
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -56,7 +65,13 @@ class PokemonFavoriteViewController : UIViewController {
     
     private func bindViewModel() {
         viewModel.updateFavoritePokemons = { [weak self] in
+            self?.emptyView.isHidden = true
             self?.tableView.reloadData()
+        }
+        
+        viewModel.displayNoFavoritePokemons = { [weak self] in
+            self?.tableView.reloadData()
+            self?.emptyView.isHidden = false
         }
     }
 }

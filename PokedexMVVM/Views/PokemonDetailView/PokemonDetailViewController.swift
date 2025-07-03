@@ -30,6 +30,10 @@ final class PokemonDetailViewController: UIViewController {
     override func loadView() {
         view = pokemonView
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupNavigationBar()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +44,6 @@ final class PokemonDetailViewController: UIViewController {
 
     private func setupView() {
         pokemonView.delegate = self
-        setupNavigationBar()
     }
 
     private func setupNavigationBar() {

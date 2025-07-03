@@ -33,7 +33,6 @@ class AppCoordinator : Coordinator {
         
         let tabBarController = UITabBarController()
         tabBarController.setViewControllers([pokemonListVC,favoriteVC,randomPokemonDetailVC], animated: true)
-        
         navController.setViewControllers([tabBarController], animated: true)
     }
     

@@ -99,11 +99,11 @@ final class PokemonTableViewCell : UITableViewCell {
             
             number.bottomAnchor.constraint(equalTo: centerYAnchor,constant: -10),
             number.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 12),
+            number.trailingAnchor.constraint(equalTo: name.trailingAnchor),
             
             name.topAnchor.constraint(equalTo: number.bottomAnchor),
             name.leadingAnchor.constraint(equalTo: number.leadingAnchor),
             name.trailingAnchor.constraint(equalTo: pokemonBackground.leadingAnchor),
-            
             
             pokemonBackground.leadingAnchor.constraint(equalTo: containerView.centerXAnchor,constant: 30),
             pokemonBackground.topAnchor.constraint(equalTo: containerView.topAnchor),

@@ -11,7 +11,7 @@ final class PokemonListViewController : UIViewController {
     
     let pokemonListView = PokemonListView()
     var viewModel : PokemonListViewViewModel
-    var coordinator : AppCoordinator?
+    weak var coordinator : AppCoordinator?
     
     override func loadView() {
         self.view = pokemonListView
