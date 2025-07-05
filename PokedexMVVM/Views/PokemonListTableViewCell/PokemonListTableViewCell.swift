@@ -123,9 +123,9 @@ final class PokemonTableViewCell : UITableViewCell {
             self?.number.text = pokemon.number
             let imageURL = URL(string: pokemon.imageURL)
             
-            guard let boundsSize = self?.pokemonImageView.bounds.size else { return }
             
-            let processor = DownsamplingImageProcessor(size: boundsSize)
+            let targetSize = CGSize(width: 64, height: 64)
+            let processor = DownsamplingImageProcessor(size: targetSize)
             
             let options: KingfisherOptionsInfo = [
                 .processor(processor),
