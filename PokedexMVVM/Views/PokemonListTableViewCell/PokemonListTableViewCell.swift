@@ -118,22 +118,22 @@ final class PokemonTableViewCell : UITableViewCell {
     }
     
     public func configure(with pokemon: PokemonCellViewModel) {
+        let imageURL = URL(string: pokemon.imageURL)
+        let targetSize = CGSize(width: 32, height: 32)
+
+        let processor = DownsamplingImageProcessor(size: targetSize)
+        let options: KingfisherOptionsInfo = [
+            .processor(processor),
+            .scaleFactor(UIScreen.main.scale),
+            .cacheOriginalImage
+        ]
+
         DispatchQueue.main.async { [weak self] in
-            self?.name.text = pokemon.name
-            self?.number.text = pokemon.number
-            let imageURL = URL(string: pokemon.imageURL)
-            
-            
-            let targetSize = CGSize(width: 64, height: 64)
-            let processor = DownsamplingImageProcessor(size: targetSize)
-            
-            let options: KingfisherOptionsInfo = [
-                .processor(processor),
-                .scaleFactor(UIScreen.main.scale),
-                .cacheOriginalImage
-            ]
-            
-            self?.pokemonImageView.kf.setImage(
+            guard let self = self else { return }
+
+            self.name.text = pokemon.name
+            self.number.text = pokemon.number
+            self.pokemonImageView.kf.setImage(
                 with: imageURL,
                 options: options
             )
