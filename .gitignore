@@ -1,66 +1,54 @@
-# === Xcode ===
-build/
-DerivedData/
+# Xcode
 *.xcworkspace
+!default.xcworkspace
+xcuserdata/
 *.xcuserstate
 *.xccheckout
-xcuserdata/
-*.moved-aside
+*.xcscmblueprint
 
-# === Swift Package Manager ===
+# Xcode build
+build/
+DerivedData/
+
+# SwiftPM
 .build/
-.swiftpm/
 Packages/
-Package.resolved
+.swiftpm/xcode/package.xcworkspace/
 
-# === CocoaPods ===
+# CocoaPods
 Pods/
 Podfile.lock
 
-# === Carthage ===
+# Carthage
 Carthage/
-Carthage/Build/
+Carthage/Checkouts
+Carthage/Build
 
-# === Core Data (exclude runtime DB, but include schema) ===
-*.sqlite
-*.sqlite-shm
-*.sqlite-wal
-
-# Keep this! Include all .xcdatamodeld files (Core Data schema)
-!*.xcdatamodeld/
-!*.xcdatamodeld/**
-
-# === Fastlane ===
+# Fastlane
 fastlane/report.xml
 fastlane/Preview.html
-fastlane/screenshots/
-fastlane/test_output/
+fastlane/screenshots
+fastlane/test_output
 
-# === User/IDE Specific ===
-*.orig
-*.swp
-.DS_Store
-.idea/
-*.iml
-*.hmap
-
-# === Archives & Symbols ===
-*.ipa
+# Archives & Logs
 *.xcarchive
-*.dSYM
+*.ipa
 *.dSYM.zip
+*.dSYM
+*.log
 
-# === Playgrounds ===
-timeline.xctimeline
-playground.xcworkspace
+# Simulator logs & data
+coreSimulatorDevices/
 
-# === SwiftLint / Tools ===
+# SwiftLint
 .swiftlint.yml
-.swiftformat
+.swiftlint.tmp
 
-# === Secrets / Configs ===
+# Misc
+*.orig
+*.DS_Store
 *.env
-*.key
-*.crt
-*.pem
+*.hmap
+*.swp
+*.swo
 
