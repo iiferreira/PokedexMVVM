@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InfoRowView: UIStackView {
+final class InfoRowView: UIStackView {
 
     private let titleLabel: UILabel = {
         let label = UILabel()

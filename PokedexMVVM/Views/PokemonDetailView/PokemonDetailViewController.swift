@@ -5,7 +5,6 @@
 //  Created by Iuri Ferreira on 6/12/25.
 //
 
-import Foundation
 import UIKit
 
 final class PokemonDetailViewController: UIViewController {

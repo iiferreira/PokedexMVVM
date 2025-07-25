@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 struct InfoRowViewModel {
     let title : String
     let value : String
@@ -60,7 +59,7 @@ final class PokemonDetailInfoView: UIView {
 
     // MARK: - Configuration
 
-    func configure(with pokemon: Pokemon) {
+    public func configure(with pokemon: Pokemon) {
         speciesRow.updateValue(pokemon.species.name.capitalized)
         heightRow.updateValue("\(pokemon.height)")
         weightRow.updateValue("\(pokemon.weight)")

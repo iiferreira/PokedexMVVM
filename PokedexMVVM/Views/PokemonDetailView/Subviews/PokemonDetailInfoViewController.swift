@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PokemonDetailInfoViewController : UIViewController {
+final class PokemonDetailInfoViewController : UIViewController {
     
     private var pokemon: Pokemon
     private lazy var infoView: PokemonDetailInfoView = PokemonDetailInfoView()

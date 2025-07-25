@@ -114,13 +114,21 @@ final class PokemonDetailView: UIView {
     
     public func configureWith(pokemon: Pokemon, color: UIColor) {
         DispatchQueue.main.async { [weak self] in
-            self?.backgroundColor = color
-            self?.name.text = pokemon.name.capitalized
-            self?.imageView.kf.setImage(with: URL(string:pokemon.imageURL), completionHandler: { [weak self] result in
-                DispatchQueue.main.async {
-                    self?.activityIndicator.stopAnimating()
-                    self?.activityIndicator.isHidden = true
-                }
+            guard let self = self else { return }
+            
+            self.backgroundColor = color
+            self.name.text = pokemon.name.capitalized
+            
+            guard let url = URL(string: pokemon.imageURL) else {
+                self.imageView.image = nil
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+                return
+            }
+            
+            self.imageView.kf.setImage(with: url, completionHandler: { [weak self] result in
+                self?.activityIndicator.stopAnimating()
+                self?.activityIndicator.isHidden = true
             })
         }
     }

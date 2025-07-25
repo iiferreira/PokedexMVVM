@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PokemonFavoriteListViewModel {
+final class PokemonFavoriteListViewModel {
     
     private(set) var favoritePokemons: [PokemonListResult] = []
     var updateFavoritePokemons: (() -> Void)?

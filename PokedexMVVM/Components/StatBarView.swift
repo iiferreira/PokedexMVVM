@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StatBarView: UIView {
+final class StatBarView: UIView {
 
     private let backgroundBar = UIView()
     private let fillBar = UIView()

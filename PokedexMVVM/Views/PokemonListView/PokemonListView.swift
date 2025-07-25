@@ -5,16 +5,13 @@
 //  Created by Iuri Ferreira on 5/26/25.
 //
 
-import Foundation
 import UIKit
 
 protocol PokemonViewDelegate: AnyObject {
     func updateTableView()
 }
 
-class PokemonListView : UIView {
-    
-    let searchController = UISearchController(searchResultsController: nil)
+final class PokemonListView : UIView {
     
     private lazy var activityView : UIActivityIndicatorView =  {
         let activityView = UIActivityIndicatorView(style: .large)

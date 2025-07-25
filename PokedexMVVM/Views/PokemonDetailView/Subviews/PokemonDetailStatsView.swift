@@ -5,8 +5,6 @@
 //  Created by Iuri Ferreira on 5/28/25.
 //
 
-
-import Foundation
 import UIKit
 
 final class PokemonDetailStatsView : UIView {

@@ -7,9 +7,9 @@
 
 import UIKit
 
-class RandomPokemonViewController : UIViewController {
+final class RandomPokemonViewController : UIViewController {
     
-    let viewModel : RandomPokemonDetailViewModel
+    private let viewModel : RandomPokemonDetailViewModel
     weak var coordinator : AppCoordinator?
     
     private lazy var fetchRandomPokemonButton : UIButton = {

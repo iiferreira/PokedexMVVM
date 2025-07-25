@@ -6,10 +6,9 @@
 //
 
 import UIKit
-import Foundation
 
 
-class EmptyPokemonView : UIView {
+final class EmptyPokemonView : UIView {
     
     lazy var imageView : UIImageView = {
         let imageView = UIImageView()

@@ -9,7 +9,7 @@ import UIKit
 
 final class PokemonListViewController : UIViewController {
     
-    let pokemonListView = PokemonListView()
+    private let pokemonListView = PokemonListView()
     var viewModel : PokemonListViewViewModel
     weak var coordinator : AppCoordinator?
     
