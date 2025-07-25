@@ -1,3 +1,4 @@
+
 //
 //  PokemonListViewViewModel.swift
 //  PokedexMVVM
@@ -6,6 +7,10 @@
 //
 
 import UIKit
+
+import Foundation
+import UIKit
+
 
 protocol PokemonListViewViewModel {
     var pokemonList: [PokemonListResult] { get }
@@ -16,13 +21,23 @@ protocol PokemonListViewViewModel {
     func loadMorePokemons() async throws
 }
 
-
+// MARK: - ViewModel Implementation
 final class PokemonListViewViewModelImpl: PokemonListViewViewModel {
 
     private(set) var pokemonList: [PokemonListResult] = []
     var displayData: (() -> Void)?
     private(set) var isLoading: Bool = false
+
     private var nextURL: String?
+    private var service: PokemonServiceProtocol
+
+    init(service: PokemonServiceProtocol = PokemonService()) {
+        self.service = service
+    }
+
+    func setService(_ service: PokemonServiceProtocol) {
+        self.service = service
+    }
 
     func fetchPokemons() async throws {
         guard canStartLoading else { return }
@@ -31,7 +46,7 @@ final class PokemonListViewViewModelImpl: PokemonListViewViewModel {
         defer { isLoading = false }
 
         do {
-            let response = try await fetchInitialPokemonData()
+            let response = try await service.fetchInitialPokemons()
             pokemonList = response.results
             nextURL = response.next
             displayData?()
@@ -47,9 +62,9 @@ final class PokemonListViewViewModelImpl: PokemonListViewViewModel {
         defer { isLoading = false }
 
         do {
-            let response: APIResponse = try await NetworkManager.shared.fetchData(from: url)
-            nextURL = response.next
+            let response = try await service.fetchMorePokemons(from: url)
             pokemonList.append(contentsOf: response.results)
+            nextURL = response.next
             displayData?()
         } catch {
             throw error
@@ -58,9 +73,5 @@ final class PokemonListViewViewModelImpl: PokemonListViewViewModel {
 
     private var canStartLoading: Bool {
         !isLoading
-    }
-
-    private func fetchInitialPokemonData() async throws -> APIResponse {
-        try await NetworkManager.shared.fetchData(from: Endpoint.short.url)
     }
 }
