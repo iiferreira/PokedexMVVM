@@ -42,7 +42,6 @@ final class PokemonDetailViewModel {
 
             onPokemonDetailFetched?(detail, color)
         } catch {
-            print("Failed to fetch Pokémon detail: \(error)")
             displayError?()
         }
     }

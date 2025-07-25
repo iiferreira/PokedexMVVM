@@ -24,7 +24,6 @@ final class PokemonFavoriteListViewModel {
             favorites.forEach {
                 newFavorites.append(PokemonListResult(name: $0.name ?? "", url: $0.url ?? ""))
             }
-            print(newFavorites)
             
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }

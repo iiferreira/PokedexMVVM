@@ -49,7 +49,7 @@ extension PokemonListViewController : UITableViewDelegate, UITableViewDataSource
         guard contentHeight > height else { return }
         
         if offsetY > contentHeight - height - 100 {
-            Task { await viewModel.loadMorePokemons() }
+            Task { try await viewModel.loadMorePokemons() }
         }
     }
 

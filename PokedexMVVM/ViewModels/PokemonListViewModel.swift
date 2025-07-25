@@ -13,7 +13,7 @@ protocol PokemonListViewViewModel {
     var isLoading: Bool { get }
 
     func fetchPokemons() async throws
-    func loadMorePokemons() async
+    func loadMorePokemons() async throws
 }
 
 
@@ -36,12 +36,11 @@ final class PokemonListViewViewModelImpl: PokemonListViewViewModel {
             nextURL = response.next
             displayData?()
         } catch {
-            print("Failed to fetch Pokémons: \(error)")
             throw error
         }
     }
 
-    func loadMorePokemons() async {
+    func loadMorePokemons() async throws {
         guard canStartLoading, let url = nextURL else { return }
 
         isLoading = true
@@ -53,7 +52,7 @@ final class PokemonListViewViewModelImpl: PokemonListViewViewModel {
             pokemonList.append(contentsOf: response.results)
             displayData?()
         } catch {
-            print("Failed to load more Pokémons: \(error)")
+            throw error
         }
     }
 
